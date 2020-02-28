@@ -7,6 +7,7 @@
     <script src="/layui.js"></script>
     <link rel="stylesheet" href="/css/layui.css">
     <script src="/js/jQuery-3.4.1.js"></script>
+    <script src="/js/login.js"></script>
 </head>
 <body>
 <!--右边-->
@@ -28,40 +29,9 @@
             <!--登录-->
             <div>
                 <button class="layui-btn layui-btn-normal" style="margin-top: 25px; width: 60%;" onclick="login()">登录</button>
+
             </div>
         </div>
     </div>
-
-<script>
-    function login() {
-        var username = document.getElementById("account").value;
-        var password = document.getElementById("password").value;
-        console.log("send request");
-        // var data = {account:username,password:password};
-        console.log(username,password);
-        $.ajax({
-            url:"/login",
-            data:{account:username,password:password},
-            dataType:"JSON",
-            type:"POST",
-            success:function(dataJson){
-                console.log(dataJson.status)
-                if(dataJson.status==1){
-                    console.log("登录成功");
-
-
-                }else{
-                    console.log(dataJson.msg);
-                    layui.use('layer', function(){
-                        var layer = layui.layer;
-                        layer.msg(dataJson.msg);
-                    });
-                }
-            }
-        })
-    }
-    
-</script>
-
 </body>
 </html>

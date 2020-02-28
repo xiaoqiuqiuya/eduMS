@@ -1,0 +1,24 @@
+#side-nav a:hover{
+    background: #4e5465;
+}
+.head-border{
+    /*border: 1px green solid;*/
+    text-align: center;
+    margin-top: 30px;
+    color: #FFFFFF;
+}
+.head-img{
+    width: 80px;
+    height: 80px;
+    border: 3px solid #44576B;
+    border-radius: 80px 80px;
+    display: inline-block;
+    /*margin-left: 60px;*/
+}
+#nav cite{
+    margin-left: 30px;
+    color: #A8BCC0 !important;
+}
+#nav li{
+    border: 0px;
+}
