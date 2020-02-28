@@ -3,17 +3,14 @@ package com.nice.demo.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.nice.demo.model.Teacher;
 import com.nice.demo.service.LoginService;
-import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 @Controller
 public class LoginController {
@@ -22,7 +19,8 @@ public class LoginController {
     LoginService loginService;
 
     @PostMapping("/login")
-    public String open(@RequestParam(name = "account") String account,
+    @ResponseBody
+    public JSONObject open(@RequestParam(name = "account") String account,
                        @RequestParam(name = "password") String password,
                        HttpServletRequest request,
                        Model model) {
@@ -34,7 +32,7 @@ public class LoginController {
             obj.put("status", "0");
             System.out.println("输入空字符串");
             model.addAttribute("LOGIN_ERROR", "不能输入空字符");
-            return "redirect:/";
+            return obj;
         }
 
         Teacher teacher = loginService.login(account, password);
@@ -46,8 +44,10 @@ public class LoginController {
 //        将讲师信息保存到session中，方便取用
         request.getSession().setAttribute("teacherID",teacher.getId());
         request.getSession().setAttribute("teacherName",teacher.getName());
+        obj.put("status",1);
         System.out.println("登录人："+teacher.getName());
         System.out.println(obj.toString());
-        return "hello";
+        return obj;
+
     }
 }

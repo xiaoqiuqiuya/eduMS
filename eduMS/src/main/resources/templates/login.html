@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="/css/login.css">
     <script src="/layui.js"></script>
     <link rel="stylesheet" href="/css/layui.css">
-    <script src="/js/jquery.js"></script>
+    <script src="/js/jQuery-3.4.1.js"></script>
 </head>
 <body>
 <!--右边-->
@@ -18,7 +18,7 @@
             <!--账号-->
             <div>
                 <i class="layui-icon layui-icon-username icon"></i>
-                <input id="username" name="username" type="text" required="required" placeholder="请输入账号" />
+                <input id="account" name="account" type="text" required="required" placeholder="请输入账号" />
             </div>
             <!--密码-->
             <div>
@@ -34,17 +34,22 @@
 
 <script>
     function login() {
-        var username = document.getElementById("username");
-        var password = document.getElementById("password");
+        var username = document.getElementById("account").value;
+        var password = document.getElementById("password").value;
+        console.log("send request");
+        // var data = {account:username,password:password};
+        console.log(username,password);
         $.ajax({
             url:"/login",
-            data:{"username":username.value,"password":password.value},
-            dataType:"json",
+            data:{account:username,password:password},
+            dataType:"JSON",
             type:"POST",
             success:function(dataJson){
                 console.log(dataJson.status)
                 if(dataJson.status==1){
                     console.log("登录成功");
+
+
                 }else{
                     console.log(dataJson.msg);
                     layui.use('layer', function(){

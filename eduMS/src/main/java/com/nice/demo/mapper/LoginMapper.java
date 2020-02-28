@@ -3,6 +3,7 @@ package com.nice.demo.mapper;
 
 import com.nice.demo.model.Teacher;
 import org.apache.ibatis.annotations.*;
+import org.springframework.stereotype.Service;
 
 @Mapper
 public interface LoginMapper {
