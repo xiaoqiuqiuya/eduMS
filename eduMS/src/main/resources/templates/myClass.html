@@ -25,15 +25,15 @@
     <table id="class-table" lay-filter="class-table">
         <thead>
         <tr>
-            <th lay-data="{field:'name', width:80, sort: true}">班级名</th>
-            <th lay-data="{field:'open_time', width:80}">开班时间</th>
-            <th lay-data="{field:'st', width:80, sort: true}">状态</th>
-            <th lay-data="{field:'city'}">阶段</th>
-            <th lay-data="{field:'charge_teacher', sort: true}">班主任</th>
-            <th lay-data="{field:'score', sort: true}">教师</th>
+            <th lay-data="{field:'name', width:250, sort: true}">班级名</th>
+            <th lay-data="{field:'open_time', width:160}">开班时间</th>
+            <th lay-data="{field:'st', width:160, sort: true}">状态</th>
+            <th lay-data="{field:'stage', width:160}">阶段</th>
+            <th lay-data="{field:'charge_teacher', sort: true, width:160}">班主任</th>
+            <th lay-data="{field:'teach_teacher', sort: true, width:160}">教师</th>
+            <th lay-data="{templet:'#classList', width:160}">操作</th>
         </tr>
         </thead>
-
     </table>
     <script type="text/html" id="classList">
         <a class="layui-btn layui-btn-xs" lay-event="edit" >编辑</a>
