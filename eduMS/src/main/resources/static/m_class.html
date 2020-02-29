@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>班级管理</title>
+
+    <script src="/js/jQuery-3.4.1.js"></script>
+    <script src="/layui.js"></script>
+    <link rel="stylesheet" href="/css/layui.css">
+
+    <script type="text/javascript" src="/js/m_class.js"></script>
+    <link rel="stylesheet" href="/css/m_class.css">
+
+
+
+</head>
+<body>
+<div class="head-border">
+    <form class="layui-form" action="" method="post" style="display: inline-block">
+        <div class="input_text">
+            <input type="text" name="content" id="content" placeholder="请输入关键字" autocomplete="off" class="layui-input ">
+        </div>
+        <div class="select">
+        <select name="status" id="status" lay-verify="">
+            <option value="">状态</option>
+            <option value="1">预开班</option>
+            <option value="2">已开班</option>
+            <option value="3">已毕业</option>
+        </select>
+        </div>
+    </form>
+    <div style="display: inline-block;">
+    <button onclick="select()" class="layui-btn" >查询</button>
+    <button onclick="addClass()" class="layui-btn layui-btn-normal" >添加班级</button>
+    </div>
+</div>
+
+<div id="data" class="data_border">
+    <table id="class-table" lay-filter="class-table">
+    </table>
+    <script type="text/html" id="classList">
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="work">作业</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="student">班级学生</a>
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="edit">编辑</a>
+        <!--<a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="log">日志</a>-->
+        <a class="layui-btn layui-btn-xs layui-btn-danger" lay-event="del">删除</a>
+    </script>
+</div>
+</body>
+</html>

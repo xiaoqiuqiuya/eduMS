@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>我的信息</title>
+    <script src="/js/jQuery-3.4.1.js"></script>
+    <link rel="stylesheet" href="/css/aboutME.css"/>
+    <script type="text/javascript" src="/js/aboutMe.js"></script>
+
+
+    <script src="/layui.js"></script>
+    <link rel="stylesheet" href="/css/layui.css">
+
+</head>
+<body>
+<div class="head-border">
+    个人中心
+    <a onclick=reflash()>
+        <i class="layui-icon layui-icon-refresh" ></i>
+    </a>
+</div>
+
+<div id="data">
+    <!--<form class="layui-form" action="#">-->
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="name" name="name" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <form class="layui-form">
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block" style="width: 190px">
+                <select name="type" id="type" lay-verify="">
+                    <option value="1">教师</option>
+                    <option value="2">班主任</option>
+                </select>
+            </div>
+        </div>
+    </form>
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机</label>
+        <div class="layui-input-block">
+            <input type="text" id="phone" name="phone" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">微信</label>
+        <div class="layui-input-block">
+            <input type="text" id="weChat" name="weChat" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" id="email" name="email" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">qq</label>
+        <div class="layui-input-block">
+            <input type="text" id="qq" name="qq" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="text" id="sex" name="sex" required  lay-verify="required" autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button class="layui-btn" onclick="doUpdateTeacher()">立即提交</button>
+        </div>
+    </div>
+    <!--</form>-->
+</div>
+
+</body>
+</html>
