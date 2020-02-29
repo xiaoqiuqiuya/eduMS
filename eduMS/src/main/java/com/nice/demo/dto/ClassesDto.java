@@ -1,17 +1,18 @@
-package com.nice.demo.model;
+package com.nice.demo.dto;
 
 import lombok.Data;
 
 @Data
-public class Classes {
+public class ClassesDto {
     private int id;
     private String createtime;
     private String updatetime;
     private String name;
     private String opentime;
     private String stage;
-    private int status;
     private int chargeteacherid;
     private int teachteacherid;
-    private int visible;
+    private String status;
+    private String chargeteacher;
+    private String teachteacher;
 }
