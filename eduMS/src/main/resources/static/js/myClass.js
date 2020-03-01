@@ -5,6 +5,7 @@ layui.use('table', function () {
         , height: 'full-100'
         , url: "/myClass"
         , page: true //开启分页
+        ,limits:[5,10,20]
         ,limit: 5
         ,cols: [[ //表头
             {field: 'id', title: '班级ID', align: 'center', width: 100, fixed: 'left'}
@@ -17,8 +18,6 @@ layui.use('table', function () {
             , {title: '操作', align: 'center', templet: "#classList", width: 200}
         ]]
     });
-
-
 //列表操作
     table.on('tool(class-table)', function (obj) {
         var layEvent = obj.event,
@@ -27,16 +26,10 @@ layui.use('table', function () {
             layer.open({
                 title: '编辑班级信息'
                 ,type:2
-                ,area: ['500px', '600px']
+                ,offset: '0px'
+                ,area: ['500px','500px']
                 ,content:'/updateClass?cid='+data.id
-                ,cancel: function(index, layero){
-                    layer.msg("挂不必");
-                }
-                ,btn: ['立即提交', '全部关闭'] //只是为了演示
-
-                ,btn2: function(){
-                    layer.closeAll();
-                }
+                ,end:function () {display();}
             });
         }else if(layEvent == 'task'){
             layer.open({
@@ -45,7 +38,6 @@ layui.use('table', function () {
                 ,area: ['800px', '600px']
                 ,content:'/task.html?id='+data.id
             });
-
         }else if(layEvent == 'stu'){
             console.log(obj.name)
             layer.open({

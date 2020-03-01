@@ -20,9 +20,15 @@ function doUpdataClass() {
         contentType: "application/json;charsetset=UTF-8",
         success: function (dataJson) {
             if (dataJson.status == 1) {
-            // 关闭所有
-                layer.msg(dataJson.msg);
-                layer.closeAll();
+                layer.alert('修改成功', {
+                    icon: 1,
+                    yes: function () {
+                        layer.msg(dataJson.msg);
+                        var index = parent.layer.getFrameIndex(window.name); //先得到当前iframe层的索引
+                        parent.layer.close(index); //再执行关闭
+                    },
+                    closeBtn: 0
+                });
             } else {
 
             }
