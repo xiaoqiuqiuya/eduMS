@@ -9,7 +9,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -19,7 +21,8 @@ public class ClassService {
 
     @Autowired
     ClassMapper classMapper;
-    private Teacher tTeacher;
+
+    //  获取我的班级
     public List<ClassesDto> getMyClasses(int limit, int page, int id, String flag) {
         List<ClassesDto> classesDtos = new ArrayList<>();
         List<Classes> classes = new ArrayList<>();
@@ -61,6 +64,7 @@ public class ClassService {
         }
         return classesDtos;
     }
+
     //    获取我的班级的数目
     public int getMyClassesCount(int id, String flag) {
         if (flag.equals("true")) {
@@ -70,5 +74,19 @@ public class ClassService {
 //            不显示已经毕业的班级
             return classMapper.getMyClassesCountNo(id);
         }
+    }
+
+    //    根据id获取班级信息
+    public Classes getClassById(String cid) {
+        return classMapper.getClassById(cid);
+    }
+
+    //   修改班级信息
+    public int updateClass(Classes classes) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+//        设置修改的时间
+        classes.setUpdatetime(time);
+        return classMapper.updateClass(classes);
     }
 }

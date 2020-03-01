@@ -28,7 +28,15 @@ layui.use('table', function () {
                 title: '编辑班级信息'
                 ,type:2
                 ,area: ['500px', '600px']
-                ,content:'/updateClass?id='+data.id
+                ,content:'/updateClass?cid='+data.id
+                ,cancel: function(index, layero){
+                    layer.msg("挂不必");
+                }
+                ,btn: ['立即提交', '全部关闭'] //只是为了演示
+
+                ,btn2: function(){
+                    layer.closeAll();
+                }
             });
         }else if(layEvent == 'task'){
             layer.open({
@@ -57,7 +65,6 @@ layui.use('table', function () {
 //    重新加载表格
 function display() {
     var flag = document.getElementById("yn").checked;
-    console.log(flag);
     layui.use('table', function () {
         var table = layui.table;
         table.reload('class-table', {
