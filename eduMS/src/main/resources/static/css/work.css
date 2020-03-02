@@ -1,0 +1,32 @@
+body{
+    width: 100%;
+    height: 100%;
+}
+.head-border{
+    margin:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    border: 1px #dddddd solid;
+    border-left: 5px #dddddd solid;
+}
+.input_text{
+    width: 80%;
+    display: inline-block;
+}
+.c-work-content{
+    width: 99%;
+    height: 350px;
+}
+.content{
+    margin:10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    height: 70%;
+    border: 1px #dddddd solid;
+}
+.c-work-bottom{
+    margin:10px;
+
+}

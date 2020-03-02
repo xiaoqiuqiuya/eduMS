@@ -5,6 +5,7 @@ import com.nice.demo.mapper.ClassMapper;
 import com.nice.demo.mapper.TeacherMapper;
 import com.nice.demo.model.Classes;
 import com.nice.demo.model.Teacher;
+import com.nice.demo.model.Work;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -88,5 +89,20 @@ public class ClassService {
 //        设置修改的时间
         classes.setUpdatetime(time);
         return classMapper.updateClass(classes);
+    }
+
+    //    获取班级作业
+    public List<Work> getClassWork(int id, int page,int limit ){
+        page = (page-1)*limit;
+        return classMapper.getClassWork(id,page,limit);
+    }
+
+//    获取班级作业总数
+    public int getClassWorkCount(int id) {
+        return  classMapper.getClassWorkCount(id);
+    }
+//获取作业信息
+    public Work getClassWorkByWid(int wid) {
+        return classMapper.getClassWorkByWid(wid);
     }
 }

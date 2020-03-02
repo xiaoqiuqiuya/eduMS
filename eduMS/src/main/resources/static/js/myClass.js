@@ -36,7 +36,7 @@ layui.use('table', function () {
                 title: '作业信息'
                 ,type:2
                 ,area: ['800px', '600px']
-                ,content:'/task.html?id='+data.id
+                ,content:'/work.html?id='+data.id
             });
         }else if(layEvent == 'stu'){
             console.log(obj.name)
@@ -65,10 +65,6 @@ function display() {
         })
     })
 }
-
-
-
-
 layui.use('form', function () {
     var form = layui.form;
     //监听提交

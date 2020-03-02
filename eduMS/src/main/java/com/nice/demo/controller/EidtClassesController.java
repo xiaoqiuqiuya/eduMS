@@ -32,7 +32,6 @@ public class EidtClassesController {
 //            添加班级
             System.out.println("cid is null");
         }
-
         return obj.toString();
     }
 }

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}"></title>
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="layui/layui.js"></script>
+    <link rel="stylesheet" href="layui/css/layui.css">
+
+
+    <script src="js/addWork.js"></script>
+    <link rel="stylesheet" href="/css/work.css">
+</head>
+<body>
+<div th:fragment="nav">
+<div class="head-border">
+    <!--<form class="layui-form" action="" method="post">-->
+    <button class="layui-btn" >知识点</button>
+    <div class="input_text">
+        <input type="text" name="point" th:value="${work.getPoint()}" id="point" placeholder="请输入知识点" autocomplete="off" class="layui-input ">
+    </div>
+    　<input type=button value="返回" class="layui-btn layui-btn-xs layui-btn-danger" onclick="window.history.go(-1)">
+    <!--</form>-->
+</div>
+<div class="content">
+    <textarea id="content" name="content" required lay-verify="required" th:value="${work.getContent()}" placeholder="作业内容" class="layui-textarea c-work-content"></textarea>
+</div>
+<div class="c-work-bottom">
+    <input type="button" class="layui-btn" onclick="doAddWork()" value="提交"/>
+</div>
+</div>
+</body>
+</html>
