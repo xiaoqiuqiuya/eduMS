@@ -105,4 +105,25 @@ public class ClassService {
     public Work getClassWorkByWid(int wid) {
         return classMapper.getClassWorkByWid(wid);
     }
+
+//    修改作业
+    public int updateWorkByWid(Work work) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+        work.setUpdatetime(time);
+        return classMapper.updateWorkByWid(work);
+    }
+
+//    删除作业
+    public int delWorkById(int delId) {
+        return classMapper.delWorkById(delId);
+    }
+//添加新的作业
+    public int addWork(Work work) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+        work.setCreatetime(time);
+        work.setUpdatetime(time);
+        return classMapper.addWork(work);
+    }
 }

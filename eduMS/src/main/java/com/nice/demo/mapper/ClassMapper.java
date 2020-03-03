@@ -50,4 +50,18 @@ public interface ClassMapper {
 //获取作业详细信息
     @Select("select * from t_class_work where id=#{wid}")
     Work getClassWorkByWid(@Param("wid") int wid);
+
+//    修改作业信息
+    @Update("update t_class_work set point=#{point},content=#{content},update_time=#{updatetime} where id=#{id}")
+    int updateWorkByWid(Work work);
+
+//    删除作业
+    @Delete("delete from t_class_work where id=#{delId}")
+    int delWorkById(int delId);
+
+//    添加作业
+    @Insert("insert into t_class_work (create_time,update_time,content," +
+            "status,class_id,point) values (#{createtime},#{updatetime}," +
+            "#{content},#{status},#{classid},#{point})")
+    int addWork(Work work);
 }
