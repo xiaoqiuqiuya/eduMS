@@ -5,14 +5,15 @@ import lombok.Data;
 @Data
 public class Student {
     private int id;
-    private String create_time;
-    private String update_time;
+    private String createtime;
+    private String updatetime;
     private String IDcard;
+    private String email;
     private String channel;
-    private String contract_time;
+    private String contracttime;
     private String education;
-    private String graduation_time;
-    private String graduation_where;
+    private String graduationtime;
+    private String graduationwhere;
     private String information;
     private String major;
     private String name;
@@ -24,6 +25,7 @@ public class Student {
     private String status;
     private String university;
     private String wechat;
-    private String contract_teacher_id;
-    private String class_id;
+    private int contractteacherid;
+    private String contractteacher;
+    private int classid;
 }

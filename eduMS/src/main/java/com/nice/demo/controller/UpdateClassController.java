@@ -22,7 +22,7 @@ public class UpdateClassController {
     ClassService classService;
 
     @GetMapping("/updateClass")
-    public String  updateClass(@RequestParam(name = "cid") String cid,
+    public String  updateClass(@RequestParam(name = "cid") int cid,
             Model model){
 //        获取班级信息
         Classes classes = classService.getClassById(cid);

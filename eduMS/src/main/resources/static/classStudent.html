@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/js/jQuery-3.4.1.js"></script>
+    <script src="/layui.js"></script>
+    <link rel="stylesheet" href="/css/layui.css">
+    <script>
+        function GetQueryString(name){
+            var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+            var r = window.location.search.substr(1).match(reg);
+            if(r!=null)return  unescape(r[2]);return null;
+        }
+        var id = GetQueryString("id");
+        layui.use('table', function () {
+            var table = layui.table;
+            table.render({
+                elem: '#student-table'
+                , height: 'full-100'
+                , url: "/getClassStudent?id="+id
+                , page: true //开启分页
+                , limits: [5, 10, 20]
+                , limit: 5
+                , cols: [[ //表头
+            {field: 'name', title: '姓名', align: 'center', width: 80, fixed: 'left'}
+        , {field: 'sex', align: 'center', title: '性别', width: 60}
+        , {field: 'email', align: 'center', title: '邮件', width: 200}
+        , {field: 'qq', align: 'center', title: 'QQ', width: 120}
+        , {field: 'university', align: 'center', title: '学校', width: 200}
+        , {field: 'major', align: 'center', title: '专业', width: 120}
+        , {field: 'education', align: 'center', title: '学历', width: 60}
+        , {field: 'graduationtime', align: 'center', title: '毕业时间', width: 120}
+        , {field: 'contracttime', align: 'center', title: '签约时间', width:120}
+        , {field: 'contractteacher', align: 'center', title: '签约人', width: 80}
+        , {field: 'educationwhere', align: 'center', title: '毕业去向', width: 60}
+        , {field: 'remark', align: 'center', title: '备注', width: 160}
+        ]]
+            });
+        });
+    </script>
+
+
+</head>
+<body>
+<table id="student-table" lay-filter="student-table">
+</table>
+</body>
+</html>

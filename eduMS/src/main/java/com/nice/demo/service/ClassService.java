@@ -1,9 +1,11 @@
 package com.nice.demo.service;
 
 import com.nice.demo.dto.ClassesDto;
+import com.nice.demo.dto.StudentDto;
 import com.nice.demo.mapper.ClassMapper;
 import com.nice.demo.mapper.TeacherMapper;
 import com.nice.demo.model.Classes;
+import com.nice.demo.model.Student;
 import com.nice.demo.model.Teacher;
 import com.nice.demo.model.Work;
 import org.springframework.beans.BeanUtils;
@@ -78,7 +80,7 @@ public class ClassService {
     }
 
     //    根据id获取班级信息
-    public Classes getClassById(String cid) {
+    public Classes getClassById(int cid) {
         return classMapper.getClassById(cid);
     }
 
@@ -125,5 +127,34 @@ public class ClassService {
         work.setCreatetime(time);
         work.setUpdatetime(time);
         return classMapper.addWork(work);
+    }
+
+//    获取班级学生
+    public List<StudentDto> getClassStudent(int id, int page, int limit) {
+        List<Student> students = classMapper.getClassStdent(id,(page-1)*limit,limit);
+        List<StudentDto> studentDtos = new ArrayList<>();
+        for (Student student:students){
+            StudentDto studentDto = new StudentDto();
+            BeanUtils.copyProperties(student,studentDto);
+            if (student.getContractteacherid() != 0){
+                String contractteacher = teacherMapper.getTeacherByID(student.getContractteacherid()).getName();
+                studentDto.setContractteacher(contractteacher);
+            }else {
+                studentDto.setContractteacher("待定");
+            }
+            if (student.getClassid()!=0){
+                studentDto.setClassName(classMapper.getClassById(student.getClassid()).getName());
+            }else {
+                studentDto.setClassName("待定");
+
+            }
+            if (student.getContractteacherid()!=0){
+                studentDto.setContractteacher(teacherMapper.getTeacherByID(student.getContractteacherid()).getName());
+            }else {
+                studentDto.setContractteacher("暂无");
+            }
+            studentDtos.add(studentDto);
+        }
+        return studentDtos;
     }
 }

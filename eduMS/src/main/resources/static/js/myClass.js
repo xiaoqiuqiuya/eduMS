@@ -46,7 +46,7 @@ layui.use('table', function () {
                 title:obj.name
                 ,type:2
                 ,area: ['800px', '600px']
-                ,content:'/student.html'
+                ,content:'/classStudent.html?id='+data.id
             });
 
         }
