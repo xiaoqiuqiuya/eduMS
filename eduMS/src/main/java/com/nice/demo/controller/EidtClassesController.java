@@ -15,23 +15,38 @@ public class EidtClassesController {
 
     @RequestMapping(value = "/editClass", method = RequestMethod.POST)
     @ResponseBody
-    public String edit(@RequestBody Classes classes) {
-        int cid = classes.getId();
+    public String edit(@RequestBody(required = false) Classes classes, @RequestParam(name = "id", defaultValue = "0") int id) {
         JSONObject obj = new JSONObject();
-        if (cid != 0) {
-//            修改班级
-            int result = classService.updateClass(classes);
-            if (result > 0) {
-                obj.put("status", 1);
-                obj.put("msg", "修改成功");
-            } else {
-                obj.put("status", 0);
-                obj.put("msg", "修改失败");
-            }
-        } else {
-//            添加班级
-            System.out.println("cid is null");
+        if (classes == null && id != 0) {
+//            删除操作
+            int result = classService.delClass(id);
+            obj = getResponse(obj, result, "删除");
+            return obj.toString();
         }
-        return obj.toString();
+        if (classes.getName() == null || "".equals(classes.getName())) {
+            obj.put("status", 0);
+            obj.put("msg", "班级名称不能为空");
+            return obj.toString();
+        }
+        if (classes.getId() == 0) {//添加班级
+            int result = classService.addClass(classes);
+            obj = getResponse(obj, result, "添加");
+            return obj.toString();
+        } else {//修改班级
+            int result = classService.updateClass(classes);
+            obj = getResponse(obj, result, "修改");
+            return obj.toString();
+        }
+
+    }
+    private JSONObject getResponse(JSONObject obj, int result, String option) {
+        if (result > 0) {
+            obj.put("status", 1);
+            obj.put("msg", option + "成功");
+        } else {
+            obj.put("status", 0);
+            obj.put("msg", option + "失败");
+        }
+        return obj;
     }
 }

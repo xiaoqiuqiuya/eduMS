@@ -19,11 +19,11 @@ public class EditWorkController {
 
     @RequestMapping("/doEditWork")
     @ResponseBody
-    public JSONObject editWork(@RequestBody(required = false) Work work, @RequestParam(name="delid", defaultValue = "0") int delid) {
+    public JSONObject editWork(@RequestBody(required = false) Work work, @RequestParam(name = "delid", defaultValue = "0") int delid) {
         JSONObject obj = new JSONObject();
 //        删除
         if (delid != 0) {
-            System.out.println("删除id"+delid);
+            System.out.println("删除id" + delid);
             int result = classService.delWorkById(delid);
             getRespon(obj, result, "删除");
             return obj;

@@ -21,13 +21,15 @@ public class GetClassStudentController {
 
     @GetMapping("/getClassStudent")
     @ResponseBody
-    public JSONObject getClassStudent(@RequestParam(name = "page",defaultValue = "1")int page,
-                                      @RequestParam(name ="limit",defaultValue = "5")int limit,
-                                      @RequestParam(name = "id")int id){
+    public JSONObject getClassStudent(@RequestParam(name = "page", defaultValue = "1") int page,
+                                      @RequestParam(name = "limit", defaultValue = "5") int limit,
+                                      @RequestParam(name = "id") int id) {
         JSONObject obj = new JSONObject();
-        List<StudentDto> studentDtos = classService.getClassStudent(id,page,limit);
-        obj.put("data",studentDtos);
-        obj.put("code",0);
+        List<StudentDto> studentDtos = classService.getClassStudent(id, page, limit);
+        int count = classService.getClassStudentCount(id);
+        obj.put("data", studentDtos);
+        obj.put("count",count);
+        obj.put("code", 0);
         return obj;
     }
 }

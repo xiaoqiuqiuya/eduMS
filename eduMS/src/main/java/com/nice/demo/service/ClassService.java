@@ -1,6 +1,7 @@
 package com.nice.demo.service;
 
 import com.nice.demo.dto.ClassesDto;
+import com.nice.demo.dto.GetClassDto;
 import com.nice.demo.dto.StudentDto;
 import com.nice.demo.mapper.ClassMapper;
 import com.nice.demo.mapper.TeacherMapper;
@@ -26,17 +27,24 @@ public class ClassService {
     ClassMapper classMapper;
 
     //  获取我的班级
-    public List<ClassesDto> getMyClasses(int limit, int page, int id, String flag) {
+    public List<ClassesDto> getMyClasses(GetClassDto getClassDto) {
         List<ClassesDto> classesDtos = new ArrayList<>();
         List<Classes> classes = new ArrayList<>();
 //        计算分页
-        int begin = (page - 1) * limit;
-        if (flag.equals("true")) {
-//            显示所有我的班级
-            classes = classMapper.getMyClasses(begin, limit, id);
+        getClassDto.setPage((getClassDto.getPage() - 1) * getClassDto.getLimit());
+
+//        判断是查询 我的班级还是所有的班级
+        if (getClassDto.getOption().equals("all")) {
+            classes = classMapper.getAllClasses(getClassDto);//查询所有的班级
         } else {
-//            不显示已经毕业的班级
-            classes = classMapper.getMyClassesNo(begin, limit, id);
+//查询我的班级
+            if (getClassDto.getFlag().equals("true")) {
+//                classes = classMapper.getMyClasses(begin, limit, id);
+                classes = classMapper.getMyClasses(getClassDto);//显示所有我的班级
+            } else {
+//                classes = classMapper.getMyClassesNo(begin, limit, id);
+                classes = classMapper.getMyClassesNo(getClassDto);//不显示已经毕业的班级
+            }
         }
         for (Classes classes1 : classes) {
             ClassesDto classesDto = new ClassesDto();
@@ -69,14 +77,19 @@ public class ClassService {
     }
 
     //    获取我的班级的数目
-    public int getMyClassesCount(int id, String flag) {
-        if (flag.equals("true")) {
-//            显示所有我的班级
-            return classMapper.getMyClassesCount(id);
+    public int getMyClassesCount(GetClassDto getClassDto) {
+        int count = 0;
+        if (getClassDto.getOption().equals("all")) {
+            count = classMapper.getclassCount(getClassDto);
+
         } else {
-//            不显示已经毕业的班级
-            return classMapper.getMyClassesCountNo(id);
+            if (getClassDto.getFlag().equals("true")) {
+                count = classMapper.getMyClassesCount(getClassDto.getTeacherId());
+            } else {
+                count = classMapper.getMyClassesCountNo(getClassDto.getTeacherId());
+            }
         }
+        return count;
     }
 
     //    根据id获取班级信息
@@ -94,21 +107,22 @@ public class ClassService {
     }
 
     //    获取班级作业
-    public List<Work> getClassWork(int id, int page,int limit ){
-        page = (page-1)*limit;
-        return classMapper.getClassWork(id,page,limit);
+    public List<Work> getClassWork(int id, int page, int limit) {
+        page = (page - 1) * limit;
+        return classMapper.getClassWork(id, page, limit);
     }
 
-//    获取班级作业总数
+    //    获取班级作业总数
     public int getClassWorkCount(int id) {
-        return  classMapper.getClassWorkCount(id);
+        return classMapper.getClassWorkCount(id);
     }
-//获取作业信息
+
+    //获取作业信息
     public Work getClassWorkByWid(int wid) {
         return classMapper.getClassWorkByWid(wid);
     }
 
-//    修改作业
+    //    修改作业
     public int updateWorkByWid(Work work) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
         String time = simpleDateFormat.format(new Date());
@@ -116,11 +130,12 @@ public class ClassService {
         return classMapper.updateWorkByWid(work);
     }
 
-//    删除作业
+    //    删除作业
     public int delWorkById(int delId) {
         return classMapper.delWorkById(delId);
     }
-//添加新的作业
+
+    //添加新的作业
     public int addWork(Work work) {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
         String time = simpleDateFormat.format(new Date());
@@ -129,32 +144,57 @@ public class ClassService {
         return classMapper.addWork(work);
     }
 
-//    获取班级学生
+    //    获取班级学生
     public List<StudentDto> getClassStudent(int id, int page, int limit) {
-        List<Student> students = classMapper.getClassStdent(id,(page-1)*limit,limit);
+        List<Student> students = classMapper.getClassStdent(id, (page - 1) * limit, limit);
         List<StudentDto> studentDtos = new ArrayList<>();
-        for (Student student:students){
+        for (Student student : students) {
             StudentDto studentDto = new StudentDto();
-            BeanUtils.copyProperties(student,studentDto);
-            if (student.getContractteacherid() != 0){
+            BeanUtils.copyProperties(student, studentDto);
+            if (student.getContractteacherid() != 0) {
                 String contractteacher = teacherMapper.getTeacherByID(student.getContractteacherid()).getName();
                 studentDto.setContractteacher(contractteacher);
-            }else {
+            } else {
                 studentDto.setContractteacher("待定");
             }
-            if (student.getClassid()!=0){
+            if (student.getClassid() != 0) {
                 studentDto.setClassName(classMapper.getClassById(student.getClassid()).getName());
-            }else {
+            } else {
                 studentDto.setClassName("待定");
 
             }
-            if (student.getContractteacherid()!=0){
+            if (student.getContractteacherid() != 0) {
                 studentDto.setContractteacher(teacherMapper.getTeacherByID(student.getContractteacherid()).getName());
-            }else {
+            } else {
                 studentDto.setContractteacher("暂无");
             }
             studentDtos.add(studentDto);
         }
         return studentDtos;
+    }
+
+    //    删除班级
+    public int delClass(int id) {
+        Classes classes = classMapper.getClassById(id);
+        if (classes == null) {
+            return 0;
+        } else {
+            int result = classMapper.delClass(id);
+            return result;
+        }
+    }
+
+//    获取班级学生总数
+    public int getClassStudentCount(int id) {
+        return classMapper.getCLassStudentCount(id);
+    }
+
+//    添加班级
+    public int addClass(Classes classes) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+        classes.setCreatetime(time);
+        classes.setUpdatetime(time);
+        return classMapper.addClass(classes);
     }
 }

@@ -20,7 +20,7 @@ function doUpdataClass() {
         contentType: "application/json;charsetset=UTF-8",
         success: function (dataJson) {
             if (dataJson.status == 1) {
-                layer.alert('修改成功', {
+                layer.alert(dataJson.msg, {
                     icon: 1,
                     yes: function () {
                         layer.msg(dataJson.msg);

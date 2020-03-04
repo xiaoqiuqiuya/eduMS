@@ -22,17 +22,21 @@ public class UpdateClassController {
     ClassService classService;
 
     @GetMapping("/updateClass")
-    public String  updateClass(@RequestParam(name = "cid") int cid,
+    public String  updateClass(@RequestParam(name = "cid",defaultValue = "0") int cid,
             Model model){
-//        获取班级信息
-        Classes classes = classService.getClassById(cid);
-//        获取教师列表  type = 1
+        //        获取教师列表  type = 1
         List<Teacher> tTeachers = teacherService.getTeacherByType(1);
 //        获取班主任列表 type = 2
         List<Teacher> cTeachers = teacherService.getTeacherByType(2);
-        model.addAttribute("thisClass",classes);
         model.addAttribute("tTeachers",tTeachers);
         model.addAttribute("cTeachers",cTeachers);
+
+        if (cid==0){
+            return "updateClass";
+        }
+//        获取班级信息
+        Classes classes = classService.getClassById(cid);
+        model.addAttribute("thisClass",classes);
         return "updateClass";
     }
 }
