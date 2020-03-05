@@ -3,7 +3,7 @@ layui.use('table', function() {
     var tableIns = table.render({
         id: 'class-table',
         elem: '#class-table'
-        , height: 'full-100'
+        , height: 'full-120'
         , url: '/myClass' //数据接口
         ,where:{all:'all'}
         , page: true//开启分页
@@ -32,7 +32,7 @@ layui.use('table', function() {
                 ,type:2
                 ,offset: '0px'
                 ,area: ['500px','500px']
-                ,content:'/updateClass?cid='+cid
+                ,content:'/getTeacherByType?cid='+cid
                 ,end:function () {display();}
             });
         }else if(layEvent == 'work'){
@@ -73,7 +73,6 @@ layui.use('table', function() {
         }
     })
 })
-
 function display() {
     layui.use('table', function () {
         var table = layui.table;
@@ -83,13 +82,10 @@ function display() {
         })
     })
 }
-
 layui.use('element', function(){
     var element = layui.element;
 
 });
-
-
 layui.use('form', function(){
     var form = layui.form;
 });
@@ -112,6 +108,6 @@ function addClass(){
         title: '添加班级'
         ,type:2
         ,area: ['500px', '600px']
-        ,content:'/updateClass'
+        ,content:'/getTeacherByType'
     });
 }

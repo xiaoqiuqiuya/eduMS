@@ -1,0 +1,12 @@
+.classForm{
+    width: 90%;
+    margin: 20px;
+}
+.head-border{
+    margin:10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    border: 1px #dddddd solid;
+    border-left: 5px #dddddd solid;
+}

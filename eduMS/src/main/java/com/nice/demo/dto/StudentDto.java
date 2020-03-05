@@ -7,7 +7,7 @@ public class StudentDto {
     private int id;
     private String createtime;
     private String updatetime;
-    private String IDcard;
+    private String idcard;
     private String channel;
     private String email;
     private String contracttime;

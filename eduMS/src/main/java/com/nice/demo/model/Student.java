@@ -7,7 +7,7 @@ public class Student {
     private int id;
     private String createtime;
     private String updatetime;
-    private String IDcard;
+    private String idcard;
     private String email;
     private String channel;
     private String contracttime;

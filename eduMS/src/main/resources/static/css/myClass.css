@@ -1,0 +1,28 @@
+.head-border{
+    margin:10px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    padding-left: 20px;
+    border: 1px #dddddd solid;
+    border-left: 5px #dddddd solid;
+}
+.data_border{
+    margin: 10px;
+}
+
+#data{
+    margin:10px;
+}
+
+.input_text{
+    width: 200px;
+    display: inline-block;
+}
+.select{
+    width: 200px;
+    margin-top: 10px;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+

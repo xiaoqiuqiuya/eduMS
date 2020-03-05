@@ -21,8 +21,9 @@ public class UpdateClassController {
     @Autowired
     ClassService classService;
 
-    @GetMapping("/updateClass")
+    @GetMapping("getTeacherByType")
     public String  updateClass(@RequestParam(name = "cid",defaultValue = "0") int cid,
+            @RequestParam(name = "option",defaultValue = "forClass")String option,
             Model model){
         //        获取教师列表  type = 1
         List<Teacher> tTeachers = teacherService.getTeacherByType(1);
@@ -31,9 +32,15 @@ public class UpdateClassController {
         model.addAttribute("tTeachers",tTeachers);
         model.addAttribute("cTeachers",cTeachers);
 
+
+        if (option.equals("addStudent")){
+            return "addStudent";
+        }
+
         if (cid==0){
             return "updateClass";
         }
+
 //        获取班级信息
         Classes classes = classService.getClassById(cid);
         model.addAttribute("thisClass",classes);

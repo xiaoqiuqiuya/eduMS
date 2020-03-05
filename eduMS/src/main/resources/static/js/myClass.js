@@ -2,7 +2,7 @@ layui.use('table', function () {
     var table = layui.table;
     table.render({
         elem: '#class-table'
-        , height: 'full-100'
+        , height: 'full-120'
         , url: "/myClass"
         , page: true //开启分页
         ,limits:[5,10,20]
@@ -28,7 +28,7 @@ layui.use('table', function () {
                 ,type:2
                 ,offset: '0px'
                 ,area: ['500px','500px']
-                ,content:'/updateClass?cid='+data.id
+                ,content:'/getTeacherByType?cid='+data.id
                 ,end:function () {display();}
             });
         }else if(layEvent == 'task'){

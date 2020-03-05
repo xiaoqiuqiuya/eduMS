@@ -4,7 +4,7 @@ layui.use('table', function() {
         //elem  绑定页面的table的id属性
         id: 'teacher-table',
         elem: '#teacher-table'
-        , height: 'full-100'
+        , height: 'full-120'
         , url: '/mTeacher' //数据接口
         , page: true//开启分页
         , limits: [5, 10, 15, 20]
@@ -85,5 +85,6 @@ layui.use('element', function(){
 
 layui.use('form', function(){
     var form = layui.form;
+
     //各种基于事件的操作，下面会有进一步介绍
 });
