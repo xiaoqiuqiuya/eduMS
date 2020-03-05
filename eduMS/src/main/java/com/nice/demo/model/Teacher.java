@@ -5,8 +5,8 @@ import lombok.Data;
 @Data
 public class Teacher {
     private int id;
-    private String create_time;
-    private String update_time;
+    private String createtime;
+    private String updatetime;
     private String email;
     private String name;
     private String password;
