@@ -7,7 +7,9 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -51,5 +53,41 @@ public class TeacherService {
 //    获取教师总数
     public int getAllTeacherCount(String content, String type) {
         return teacherMapper.getAllTeacherCount(content,type);
+    }
+
+//    编辑教师
+    public int editTeacher(Teacher teacher) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
+        String time = simpleDateFormat.format(new Date());
+        teacher.setUpdatetime(time);
+        int result = 0;
+
+        if (teacher.getId()==0){
+//            添加教师
+            teacher.setCreatetime(time);
+            teacher.setStatus(1);
+            result= teacherMapper.addTeacher(teacher);
+        }else {
+            result = teacherMapper.updateTeacher(teacher);
+        }
+        return result;
+
+    }
+
+//    修改状态
+    public int updateTeacherStatus(Boolean flag,int id) {
+        int result = 0;
+        if (flag){
+            result = teacherMapper.updateTeacherStatus(1,id);
+        }else {
+            result = teacherMapper.updateTeacherStatus(0,id);
+
+        }
+        return result;
+    }
+
+//    删除教师
+    public int delTeacher(int id) {
+        return teacherMapper.delTeacher(id);
     }
 }

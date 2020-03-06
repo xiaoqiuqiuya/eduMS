@@ -37,15 +37,6 @@ function reflash(){
     location=location;
 }
 function doUpdateTeacher() {
-    console.log("修改教师");
-    var name = document.getElementById("name");
-    var type = document.getElementById("type");
-    var qq = document.getElementById("qq");
-    var weChat = document.getElementById("weChat");
-    var phone = document.getElementById("phone");
-    var email = document.getElementById("email");
-    var sex = document.getElementById("sex");
-
     //发送ajax执行修改教师
     $.ajax({
         url:"updataTeacher?option=updataTeacher",

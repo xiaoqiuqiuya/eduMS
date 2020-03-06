@@ -15,24 +15,34 @@
         <div class="layui-form-item">
             <label class="layui-form-label">班级名</label>
             <div class="layui-input-block">
-                <input type="text" name="name" th:if="${thisClass != null}" th:value="${thisClass.getName()}" id="name" autocomplete="off"
+                <input type="text" name="name" th:if="${thisClass != null}"
+                       th:value="${thisClass.getName()}" id="name"
+                       autocomplete="off"
                        class="layui-input" style="width: 70%">
-                <input type="text" name="name" th:if="${thisClass == null}" id="name" autocomplete="off"
+                <input type="text" name="name" th:if="${thisClass == null}"
+                       id="name" autocomplete="off"
                        class="layui-input" style="width: 70%">
-                <input type="text" id="id" name="id"  th:if="${thisClass != null}"  th:value="${thisClass.getId()}" hidden/>
+                <input type="text" id="id" name="id"
+                       th:if="${thisClass != null}"
+                       th:value="${thisClass.getId()}" hidden/>
             </div>
         </div>
         <!--状态-->
         <div class="layui-form-item">
             <label class="layui-form-label">状态</label>
             <div class="layui-input-block" style="width: 180px">
-                <select name="status" id="status" th:if="${thisClass != null}"   lay-verify="">
-                    <option value="1"  th:selected="${thisClass.getStatus()==1}">预开班</option>
-                    <option value="2" th:selected="${thisClass.getStatus()==2}">已开班</option>
-                    <option value="3" th:selected="${thisClass.getStatus()==3}">已毕业</option>
+                <select name="status" id="status" th:if="${thisClass != null}"
+                        lay-verify="">
+                    <option value="1" th:selected="${thisClass.getStatus()==1}">预开班
+                    </option>
+                    <option value="2" th:selected="${thisClass.getStatus()==2}">已开班
+                    </option>
+                    <option value="3" th:selected="${thisClass.getStatus()==3}">已毕业
+                    </option>
                 </select>
-                <select name="status" id="status" th:if="${thisClass == null}"   lay-verify="">
-                    <option value="1" >预开班</option>
+                <select name="status" id="status" th:if="${thisClass == null}"
+                        lay-verify="" style="width: 180px">
+                    <option value="1">预开班</option>
                     <option value="2">已开班</option>
                     <option value="3">已毕业</option>
                 </select>
@@ -42,9 +52,12 @@
         <div class="layui-form-item">
             <label class="layui-form-label">阶段</label>
             <div class="layui-input-block">
-                <input type="text" name="stage" id="stage"   th:if="${thisClass != null}"th:value="${thisClass.getStage()}" autocomplete="off"
+                <input type="text" name="stage" id="stage"
+                       th:if="${thisClass != null}"
+                       th:value="${thisClass.getStage()}" autocomplete="off"
                        class="layui-input" style="width: 70%">
-                <input type="text" name="stage" id="stage"   th:if="${thisClass == null}" autocomplete="off"
+                <input type="text" name="stage" id="stage"
+                       th:if="${thisClass == null}" autocomplete="off"
                        class="layui-input" style="width: 70%">
             </div>
         </div>
@@ -52,24 +65,33 @@
         <div class="layui-form-item">
             <label class="layui-form-label">开班时间</label>
             <div class="layui-input-block">
-                <input type="text" name="opentime" id="opentime"  th:if="${thisClass != null}" th:value="${thisClass.getOpentime()}"
-                       autocomplete="off" class="layui-input" style="width: 70%">
-                <input type="text" name="opentime" id="opentime"  th:if="${thisClass == null}"
-                       autocomplete="off" class="layui-input" style="width: 70%">
+                <input type="text" name="opentime" id="opentime"
+                       th:if="${thisClass != null}"
+                       th:value="${thisClass.getOpentime()}"
+                       autocomplete="off" class="layui-input"
+                       style="width: 70%">
+                <input type="text" name="opentime" id="opentime"
+                       th:if="${thisClass == null}"
+                       autocomplete="off" class="layui-input"
+                       style="width: 70%">
             </div>
         </div>
         <!--班主任-->
         <div class="layui-form-item">
             <label class="layui-form-label">班主任</label>
             <div class="layui-input-block" style="width: 190px">
-                <select name="chargeteacherid"  th:if="${thisClass != null}" id="chargeteacherid" lay-verify="">
-                    <option th:each="teacher:${cTeachers}" th:value="${teacher.getId()}"
+                <select name="chargeteacherid" id="chargeteacherid"
+                        lay-verify="">
+                    <option value="">请选择</option>
+                    <option th:if="${thisClass != null}"
+                            th:each="teacher:${cTeachers}"
+                            th:value="${teacher.getId()}"
                             th:selected="${teacher.getId()==thisClass.getChargeteacherid()}"
                             th:text="${teacher.getName()}"></option>
-                </select>
 
-                <select name="chargeteacherid"  th:if="${thisClass == null}" id="chargeteacherid" lay-verify="">
-                    <option th:each="teacher:${cTeachers}" th:value="${teacher.getId()}"
+                    <option th:if="${thisClass == null}"
+                            th:each="teacher:${cTeachers}"
+                            th:value="${teacher.getId()}"
                             th:text="${teacher.getName()}"></option>
                 </select>
             </div>
@@ -78,22 +100,27 @@
         <div class="layui-form-item">
             <label class="layui-form-label">教师</label>
             <div class="layui-input-block" style="width: 190px">
-                <select name="teachteacherid" id="teachteacherid" th:if="${thisClass != null}"  lay-verify="">
-                    <option th:each="teacher:${tTeachers}" th:value="${teacher.getId()}"
+                <select name="teachteacherid" id="teachteacherid" lay-verify="">
+                    <option value="">请选择</option>
+                    <option th:if="${thisClass != null}"
+                            th:each="teacher:${tTeachers}"
+                            th:value="${teacher.getId()}"
                             th:selected="${teacher.getId()==thisClass.getTeachteacherid()}"
+                            th:text="${teacher.getName()}"></option>
+                    <option th:if="${thisClass == null}"
+                            th:each="teacher:${tTeachers}"
+                            th:value="${teacher.getId()}"
                             th:text="${teacher.getName()}"></option>
                 </select>
 
-                <select name="teachteacherid" id="teachteacherid" th:if="${thisClass == null}"  lay-verify="">
-                    <option th:each="teacher:${tTeachers}" th:value="${teacher.getId()}"
-                            th:text="${teacher.getName()}"></option>
-                </select>
+
             </div>
         </div>
         <div class="layui-form-item">
             <div class="layui-input-block">
                 <!--<button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>-->
-                <input class="layui-btn" type="button" onclick="doUpdataClass()" value="立即提交"/>
+                <input class="layui-btn" type="button" onclick="doUpdataClass()"
+                       value="立即提交"/>
             </div>
         </div>
     </form>

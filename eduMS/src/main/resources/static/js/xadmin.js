@@ -160,3 +160,13 @@ function x_admin_close(){
 }
 
 
+function aboutMe() {
+    layer.open({
+        title: '我的信息'
+        ,type:2
+        ,area: ['500px', '500px']
+        ,content:'/getTeacher?option=aboutMe'
+    });
+}
+
+

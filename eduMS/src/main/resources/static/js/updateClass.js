@@ -30,10 +30,11 @@ function doUpdataClass() {
                     closeBtn: 0
                 });
             } else {
-
+                layer.alert(dataJson.msg, {
+                    icon: 2,
+                    closeBtn: 0
+                });
             }
-
-
         }
     })
 

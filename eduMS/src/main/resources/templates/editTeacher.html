@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript" src="/js/jquery.js"></script>
+    <script type="text/javascript" src="/layui.js"></script>
+    <link rel="stylesheet" href="/css/layui.css">
+    <script src="/js/editTeacher.js"></script>
+
+
+</head>
+<body>
+<form class="layui-form" lay-filter="teacher-data"  style="margin-top: 10px">
+    <div class="layui-form-item">
+        <label class="layui-form-label">姓名</label>
+        <div class="layui-input-block">
+            <input type="text" id="id" name="id" th:if="${teacher!=null}"
+                   th:value="${teacher.getId()}" th:hidden="true">
+
+            <input type="text" id="name" name="name" th:if="${teacher!=null}"
+                   th:value="${teacher.getName()}" required
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+            <input type="text" id="name" name="name" th:if="${teacher==null}"
+                   required
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block" style="width: 190px">
+                <select name="type" id="type" lay-verify="">
+                    <option th:selected="${teacher !=null && teacher.getType()==1}"
+                            value="1">教师
+                    </option>
+                    <option th:selected="${teacher !=null &&teacher.getType()==1}"
+                            value="2">班主任
+                    </option>
+                </select>
+            </div>
+        </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">手机</label>
+        <div class="layui-input-block">
+            <input type="text" id="phone" name="phone" required
+                   th:if="${teacher!=null}" th:value="${teacher.getPhone()}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+            <input type="text" id="phone" name="phone" required
+                   th:if="${teacher==null}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+
+    <div class="layui-form-item" th:if="${teacher==null}">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input type="password" id="password" name="password" required
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">微信</label>
+        <div class="layui-input-block">
+            <input type="text" id="wechat" name="wechat" required
+                   th:if="${teacher!=null}" th:value="${teacher.getWechat()}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+            <input type="text" id="wechat" name="wechat" required
+                   th:if="${teacher==null}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">邮箱</label>
+        <div class="layui-input-block">
+            <input type="text" id="email" name="email" required
+                   th:if="${teacher!=null}" th:value="${teacher.getEmail()}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+            <input type="text" id="email" name="email" required
+                   th:if="${teacher==null}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">qq</label>
+        <div class="layui-input-block">
+            <input type="text" id="qq" name="qq" required lay-verify="required"
+                   th:if="${teacher!=null}" th:value="${teacher.getQq()}"
+                   autocomplete="off" class="layui-input" style="width: 50%">
+            <input type="text" id="qq" name="qq" required lay-verify="required"
+                   th:if="${teacher==null}"
+                   autocomplete="off" class="layui-input" style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label">性别</label>
+        <div class="layui-input-block">
+            <input type="text" id="sex" name="sex" required
+                   th:if="${teacher!=null}" th:value="${teacher.getSex()}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+            <input type="text" id="sex" name="sex" required
+                   th:if="${teacher==null}"
+                   lay-verify="required" autocomplete="off" class="layui-input"
+                   style="width: 50%">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" onclick="doUpdateTeacher()">立即提交</button>
+        </div>
+    </div>
+</form>
+
+
+</body>
+</html>

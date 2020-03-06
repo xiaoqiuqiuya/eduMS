@@ -1,4 +1,4 @@
-layui.use('table', function() {
+layui.use('table', function () {
     var table = layui.table;
     var tableIns = table.render({
         //elem  绑定页面的table的id属性
@@ -17,73 +17,108 @@ layui.use('table', function() {
             , {field: 'email', align: 'center', title: '邮件', width: 240}
             , {field: 'qq', align: 'center', title: 'QQ', width: 160}
             , {field: 'sex', align: 'center', title: '性别', width: 50}
-            , {field: 'statusToString', align: 'center', title: '状态', width: 80}
-            , {title: '操作', align: 'center', templet: "#teacherList", width: 160}
+
+            , {
+                align: 'center',
+                title: '状态',
+                templet: "#status",
+                width: 80
+            }
+            , {
+                title: '操作',
+                align: 'center',
+                templet: "#teacherList",
+                width: 160
+            }
         ]]
     })
     //列表操作
     table.on('tool(teacher-table)', function (obj) {
         var layEvent = obj.event,
             data = obj.data;
+        var id = data.id
         if (layEvent == 'edit') {
-            var cont = '/aboutMe.html?tid='+data.id;
+            var cont = "/getTeacher?option=editTeacher&id=" + id;
             console.log(data.id);
             layer.open({
                 title: '修改教师信息'
-                ,type:2
-                ,area: ['500px', '600px']
-                ,content:cont
-                // ,content:'/updateClass.html?data='+jsonStr+"&id="+data.id
-            });
-        }else if(layEvent=='stop'){
-            layer.open({
-                content: '确定停用该教师？'
-                ,btn: ['确定']
-                ,yes: function(index, layero){
-                    $.ajax({
-                        url:'/stopTeacher',
-                        data:{tid:data.id},
-                        type:"POST",
-                        dataType:"JSON",
-                        success:function (dataJson) {
-                            layer.msg(dataJson.msg)
-                            if (dataJson.status==1){
-                                location=location;
-                            }
-                            return;
-                        }
-                    })
+                , type: 2
+                , area: ['500px', '500px']
+                , content: cont
+                , end: function () {
+                    doSelect();
                 }
             });
+        } else if (layEvent == 'changeStatus') {
+            console.log(id);
+            var flag = document.getElementById("yn").checked;
+            $.ajax({
+                url: "updateTeacherStatus",
+                data: {flag: flag,id:id},
+                type: "POST",
+                dataType: "JSON"
+
+            })
+        }else if (layEvent == 'del') {
+            console.log(id);
+            $.ajax({
+                url: "updateTeacherStatus",
+                data: {del: true,id:id},
+                type: "POST",
+                dataType: "JSON",
+                success:function (dataJson) {
+                    if(dataJson.status==1){
+                        layer.alert(dataJson.msg,{icon:1,
+                        })
+                    }else {
+                        layer.alert(dataJson.msg,{icon:2})
+                    }
+                }
+
+            })
         }
     })
 
+
 })
 
-function  doSelect() {
+
+function addTeacher() {
+    layer.open({
+        title: '添加教师'
+        , type: 2
+        , area: ['500px', '550px']
+        , content: '/getTeacher?option=addTeacher'
+        , end: function () {
+            doSelect();
+        }
+    });
+}
+
+function doSelect() {
     //获取 content type flag
     var content = document.getElementById("content").value;
     var type = document.getElementById("type").value;
-    console.log("content:"+content+"    type:"+type );
-    layui.use('table', function() {
+    console.log("content:" + content + "    type:" + type);
+    layui.use('table', function () {
         var table = layui.table;
-       table.reload("teacher-table",{
+        table.reload("teacher-table", {
             url: '/mTeacher' //数据接口
-            ,where:{content:content,type:type}
+            , where: {content: content, type: type}
         })
     })
 }
 
 
 //注意：导航 依赖 element 模块，否则无法进行功能性操作
-layui.use('element', function(){
+layui.use('element', function () {
     var element = layui.element;
 
     //…
 });
 
 
-layui.use('form', function(){
+layui.use('form', function () {
     var form = layui.form;
 
     //各种基于事件的操作，下面会有进一步介绍
