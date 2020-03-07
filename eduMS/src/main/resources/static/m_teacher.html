@@ -47,13 +47,14 @@
 
     <script type="text/html" id="status">
         {{# if(d.status==1){ }}
-        <a lay-event="changeStatus" >
-        <input type="checkbox" id="yn" name="yn" lay-skin="switch"
-               lay-text="激活|停用" checked/></a>
+        <a lay-event="changeStatus">
+            <input type="checkbox" id="yn" name="yn" lay-skin="switch"
+                   lay-text="激活|停用" checked/></a>
         {{# }else{ }}
-        <a lay-event="changeStatus" >
-        <input type="checkbox" id="yn" name="yn"  lay-event="changeStatus" lay-skin="switch"
-               lay-text="激活|停用"/></a>
+        <a lay-event="changeStatus">
+            <input type="checkbox" id="yn" name="yn" lay-event="changeStatus"
+                   lay-skin="switch"
+                   lay-text="激活|停用"/></a>
         {{#}}}
     </script>
 

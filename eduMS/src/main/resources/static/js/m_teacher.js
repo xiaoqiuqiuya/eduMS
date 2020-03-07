@@ -22,7 +22,7 @@ layui.use('table', function () {
                 align: 'center',
                 title: '状态',
                 templet: "#status",
-                width: 80
+                width: 100
             }
             , {
                 title: '操作',
@@ -54,24 +54,24 @@ layui.use('table', function () {
             var flag = document.getElementById("yn").checked;
             $.ajax({
                 url: "updateTeacherStatus",
-                data: {flag: flag,id:id},
+                data: {flag: flag, id: id},
                 type: "POST",
                 dataType: "JSON"
-
             })
-        }else if (layEvent == 'del') {
+        } else if (layEvent == 'del') {
             console.log(id);
             $.ajax({
                 url: "updateTeacherStatus",
-                data: {del: true,id:id},
+                data: {del: true, id: id},
                 type: "POST",
                 dataType: "JSON",
-                success:function (dataJson) {
-                    if(dataJson.status==1){
-                        layer.alert(dataJson.msg,{icon:1,
+                success: function (dataJson) {
+                    if (dataJson.status == 1) {
+                        layer.alert(dataJson.msg, {
+                            icon: 1,
                         })
-                    }else {
-                        layer.alert(dataJson.msg,{icon:2})
+                    } else {
+                        layer.alert(dataJson.msg, {icon: 2})
                     }
                 }
 

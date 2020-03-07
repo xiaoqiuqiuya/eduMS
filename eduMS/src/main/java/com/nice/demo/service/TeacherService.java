@@ -90,4 +90,8 @@ public class TeacherService {
     public int delTeacher(int id) {
         return teacherMapper.delTeacher(id);
     }
+//    修改密码
+    public int updateTeacherPassword(String password,int id) {
+        return teacherMapper.updateTeacherPassword(password,id);
+    }
 }

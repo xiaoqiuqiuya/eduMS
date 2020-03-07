@@ -40,4 +40,8 @@ public interface TeacherMapper {
 //    删除
     @Delete("delete from t_seehope_teacher where id=#{id}")
     int delTeacher(@Param("id") int id);
+
+//    修改密码
+    @Update("update t_seehope_teacher set password=#{password} where id=#{id}")
+    int updateTeacherPassword(@Param("password") String password,@Param("id") int id);
 }
